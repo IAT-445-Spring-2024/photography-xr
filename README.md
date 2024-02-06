@@ -5,3 +5,6 @@
 - [All Repositories](https://github.com/orgs/IAT-445-Spring-2024/repositories)
 - [Google Drive Folder for Assets](https://drive.google.com/drive/folders/1vUGICbl9vKhAZNfRjT8r09H8Djj22oAI?usp=sharing)
 - [VRDD](https://docs.google.com/document/d/1Kxe_4RbYfEkPVgoESKsANGtPESoxxvr3/edit?usp=sharing&ouid=105641587753452360342&rtpof=true&sd=true)
+## References
+- [Setting Up Git for Unity](https://www.youtube.com/watch?v=_ewoEQFEURg)
+- [Unity VR Tutorials](https://www.youtube.com/playlist?list=PLpEoiloH-4eP-OKItF8XNJ8y8e1asOJud)
