@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 5378942544048378513}
   - component: {fileID: 3970139698277540310}
   - component: {fileID: 3261569647263234299}
+  - component: {fileID: 4053387507875002745}
   m_Layer: 0
   m_Name: Physical Camera
   m_TagString: Untagged
@@ -292,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9213596846285240931}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -503,3 +504,15 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &4053387507875002745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213596846285240931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3003ceeffc0c44db2b2fdc4dee429558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
