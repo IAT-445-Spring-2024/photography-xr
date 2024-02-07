@@ -10,6 +10,7 @@ public class PhysicalCamera: MonoBehaviour {
 
     [SerializeField] private Volume volume;
     [SerializeField] private TextMeshPro textMesh;
+    [SerializeField] private float focusSpeed = 3;
     private DepthOfField depthOfField;
 
     private void Start() {
@@ -35,7 +36,8 @@ public class PhysicalCamera: MonoBehaviour {
         Ray ray = new(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit)) {
             float hitDistance = Vector3.Distance(transform.position, hit.point);
-            depthOfField.focusDistance.value = hitDistance;
+            float currentFocusDistance = depthOfField.focusDistance.value;
+            depthOfField.focusDistance.value += Time.deltaTime * (hitDistance - currentFocusDistance) * focusSpeed;
             textMesh.text = hitDistance.ToString();
         }
     }
