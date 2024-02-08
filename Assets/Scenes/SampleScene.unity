@@ -2380,6 +2380,21 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_FocalLength
+      value: 20.78461
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: volume
@@ -2399,6 +2414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696499566119563152, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9213596846285240931, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}

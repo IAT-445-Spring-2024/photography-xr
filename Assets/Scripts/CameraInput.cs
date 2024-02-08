@@ -14,15 +14,13 @@ public class CameraInput : MonoBehaviour {
     private void Start() {
         primaryButtonActionProperty.action.Enable();
         secondaryButtonActionProperty.action.Enable();
-        primaryButtonActionProperty.action.performed += Primary_Performed;
-        secondaryButtonActionProperty.action.performed += Secondary_Performed;
     }
 
-    private void Primary_Performed(UnityEngine.InputSystem.InputAction.CallbackContext context) {
-        OnZoomOutPressed?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Secondary_Performed(UnityEngine.InputSystem.InputAction.CallbackContext context) {
-        OnZoomInPressed?.Invoke(this, EventArgs.Empty);
+    private void Update() {
+        if (primaryButtonActionProperty.action.IsPressed()) {
+            OnZoomOutPressed?.Invoke(this, EventArgs.Empty);
+        } else if (secondaryButtonActionProperty.action.IsPressed()) {
+            OnZoomInPressed?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
