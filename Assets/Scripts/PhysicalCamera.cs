@@ -14,7 +14,8 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private float focusSpeed = 3f;
     [SerializeField] private float zoomSpeed = 1f;
     [SerializeField] private CameraInput cameraInput; // The lifecycle is binded to a game object.
-    [SerializeField] private Camera viewingCamera;
+    [SerializeField] private Camera cameraFX;
+    [SerializeField] private Camera viewCamera;
     [SerializeField] private float lowestFocalLength = 20f;
     [SerializeField] private float highestFocalLength = 200;
     private DepthOfField depthOfField;
@@ -31,14 +32,16 @@ public class PhysicalCamera: MonoBehaviour {
     }
 
     private void PerformZoomIn(object sender, EventArgs args) {
-        if (viewingCamera.focalLength >= highestFocalLength) { return; }
-        viewingCamera.focalLength += 1 * zoomSpeed;
+        if (cameraFX.focalLength >= highestFocalLength) { return; }
+        cameraFX.focalLength += 1 * zoomSpeed;
+        viewCamera.focalLength += 1 * zoomSpeed;
         textMesh.text = "Zooming In";
     }
 
     private void PerformZoomOut(object sender, EventArgs args) {
-        if (viewingCamera.focalLength <= lowestFocalLength) { return; }
-        viewingCamera.focalLength -= 1 * zoomSpeed;
+        if (cameraFX.focalLength <= lowestFocalLength) { return; }
+        cameraFX.focalLength -= 1 * zoomSpeed;
+        viewCamera.focalLength -= 1 * zoomSpeed;
         textMesh.text = "Zooming Out";
     }
 

@@ -2360,41 +2360,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3531447327149743459, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_text
-      value: Subject Distance
-      objectReference: {fileID: 0}
-    - target: {fileID: 3531447327149743459, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3531447327149743459, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3531447327149743459, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: field of view
-      value: 60.000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_FocalLength
-      value: 20.78461
-      objectReference: {fileID: 0}
-    - target: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: volume
@@ -2405,21 +2370,6 @@ PrefabInstance:
       propertyPath: cameraInput
       value: 
       objectReference: {fileID: 911962081}
-    - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: viewingCamera
-      value: 
-      objectReference: {fileID: 4683737428186040504}
-    - target: {fileID: 7031227549790473943, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8696499566119563152, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9213596846285240931, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: m_Name
@@ -2434,12 +2384,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f910cd0bedba14e25b097e756298a7d2, type: 3}
---- !u!20 &4683737428186040504 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3966576435037660891, guid: f910cd0bedba14e25b097e756298a7d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 4683737428186040503}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
