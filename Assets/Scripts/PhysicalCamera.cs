@@ -5,17 +5,37 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using TMPro;
+using System;
 
 public class PhysicalCamera: MonoBehaviour {
 
     [SerializeField] private Volume volume;
     [SerializeField] private TextMeshPro textMesh;
-    [SerializeField] private float focusSpeed = 3;
+    [SerializeField] private float focusSpeed = 3f;
+    [SerializeField] private float zoomSpeed = 1f;
+    [SerializeField] private CameraInput cameraInput; // The lifecycle is binded to a game object.
+    [SerializeField] private Camera viewingCamera;
     private DepthOfField depthOfField;
 
     private void Start() {
         RegisterShutterAction();
-        SetUpFocus();
+        RegisterControls();
+        RegisterEffects();
+    }
+
+    private void RegisterControls() {
+        cameraInput.OnZoomInPressed += PerformZoomIn;
+        cameraInput.OnZoomOutPressed += PerformZoomOut;
+    }
+
+    private void PerformZoomIn(object sender, EventArgs args) {
+        viewingCamera.focalLength += 1;
+        textMesh.text = "Zooming In";
+    }
+
+    private void PerformZoomOut(object sender, EventArgs args) {
+        viewingCamera.focalLength -= 1;
+        textMesh.text = "Zooming Out";
     }
 
     private void RegisterShutterAction() {
@@ -23,13 +43,13 @@ public class PhysicalCamera: MonoBehaviour {
         grabInteractable.activated.AddListener(OnActivate);
     }
 
-    private void SetUpFocus() {
+    private void RegisterEffects() {
         volume.profile.TryGet(out depthOfField);
     }
 
     private void OnActivate(ActivateEventArgs args) {
         // TODO: Take photo.
-
+        textMesh.text = "Took Photo";
     }
 
     private void FixedUpdate() {
@@ -38,7 +58,7 @@ public class PhysicalCamera: MonoBehaviour {
             float hitDistance = Vector3.Distance(transform.position, hit.point);
             float currentFocusDistance = depthOfField.focusDistance.value;
             depthOfField.focusDistance.value += Time.deltaTime * (hitDistance - currentFocusDistance) * focusSpeed;
-            textMesh.text = hitDistance.ToString();
+            // textMesh.text = hitDistance.ToString();
         }
     }
 }
