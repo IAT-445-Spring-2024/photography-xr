@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.jetxr.visionui": {
+      "version": "https://github.com/jetstyle/Apple-Vision-Pro-UI-Kit.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.xr.interaction.toolkit": "2.4.1",
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "3de4dfbb6390c0279ac519c29ffec74ade1bd178"
+    },
     "com.unity.burst": {
       "version": "1.8.11",
       "depth": 1,
