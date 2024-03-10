@@ -149,7 +149,7 @@ public class MenuController : MonoBehaviour {
     class ShutterOption: Option {
         private readonly Slider slider;
         private readonly Camera camera;
-        private readonly float adjustmentSpeed = 0.01f;
+        private readonly float adjustmentSpeed = 1f;
 
         private float GetShutterSpeedFromSliderValue() {
             return slider.value / 1000;
@@ -175,7 +175,7 @@ public class MenuController : MonoBehaviour {
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
-                slider.value -= byAmount * adjustmentSpeed;
+                slider.value += byAmount * adjustmentSpeed;
             }
             camera.shutterSpeed = GetShutterSpeedFromSliderValue();
         }
@@ -211,7 +211,7 @@ public class MenuController : MonoBehaviour {
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
-                slider.value -= byAmount * adjustmentSpeed;
+                slider.value += byAmount * adjustmentSpeed;
             }
             camera.shutterSpeed = GetApertureFromSliderValue();
         }
@@ -247,7 +247,7 @@ public class MenuController : MonoBehaviour {
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
-                slider.value -= byAmount * adjustmentSpeed;
+                slider.value += byAmount * adjustmentSpeed;
             }
             camera.shutterSpeed = GetISOFromSliderValue();
         }

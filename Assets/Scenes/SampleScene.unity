@@ -7696,14 +7696,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Physical Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 9213596846285240931, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2894950319296682889, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f910cd0bedba14e25b097e756298a7d2, type: 3}
 --- !u!20 &4683737428186040504 stripped
 Camera:
