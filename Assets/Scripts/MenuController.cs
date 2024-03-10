@@ -65,17 +65,18 @@ public class MenuController : MonoBehaviour {
             activeOption.SwitchToLeftValue(adjustmentVector.magnitude * Time.deltaTime);
         } else if (intentionVector == Vector2.right) {
             activeOption.SwitchToRightValue(adjustmentVector.magnitude * Time.deltaTime);
-        } 
-        
+        }
+
         // Updating options
-        else if (adjustmentVector != Vector2.zero) {
+        bool isChangingOption = intentionVector == Vector2.up || intentionVector == Vector2.down;
+        if (isChangingOption) {
             Vector3 targetPosition = intentionVector == Vector2.up ? topPosition : bottomPosition;
             selectionFrame.transform.position = Vector3.Lerp(
                 selectionFrame.transform.position,
                 targetPosition,
                 Time.deltaTime * animationSpeed
             );
-        } else if (adjustmentVector == Vector2.zero) {
+        } else {
             Option targetOption = CloestOption(selectionFrame.transform.position);
             Vector3 targetPosition = new Vector3(
                 selectionFrame.transform.position.x, 
