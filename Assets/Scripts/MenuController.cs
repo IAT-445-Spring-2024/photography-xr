@@ -117,7 +117,11 @@ public class MenuController : MonoBehaviour {
         float maxDotProduct = float.MinValue;
         Vector2 resultingVector = Vector2.zero;
         foreach ((var vector, var product) in vectorProductPairs) {
+            //Debug.Log("Comparing:");
+            //Debug.Log(product);
+            //Debug.Log(maxDotProduct);
             if (product > maxDotProduct) {
+                maxDotProduct = product;
                 resultingVector = vector;
             }
         }
