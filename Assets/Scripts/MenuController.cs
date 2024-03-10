@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 
+    // TODO: We can probably generalize this with ScriptableObjects
     [SerializeField] private Camera physicalCamera;
     [SerializeField] private GameObject selectionFrame;
     [SerializeField] private Slider shutterSlider;
@@ -81,12 +82,13 @@ public class MenuController : MonoBehaviour {
                 targetOption.GetTransformY(), 
                 selectionFrame.transform.position.z
             );
+            // TODO: To make it smoother, consider the final velocity of the last motion.
             selectionFrame.transform.position = Vector3.Lerp(
                 selectionFrame.transform.position,
                 targetPosition,
                 Time.deltaTime * animationSpeed * 2
             );
-            if (Math.Abs(selectionFrame.transform.position.y - targetPosition.y) < 0.0001) {
+            if (Math.Abs(selectionFrame.transform.position.y - targetPosition.y) < 1) {
                 activeOption = targetOption;
             }
         }

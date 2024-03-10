@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_Camera: {fileID: 1331071527}
   m_OriginBaseGameObject: {fileID: 798322346}
   m_CameraFloorOffsetObject: {fileID: 6259452}
-  m_RequestedTrackingOriginMode: 2
+  m_RequestedTrackingOriginMode: 1
   m_CameraYOffset: 1.1176
 --- !u!4 &798322349
 Transform:
@@ -7688,6 +7688,11 @@ PrefabInstance:
       objectReference: {fileID: 655518779}
     - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
+      propertyPath: zoomSlider
+      value: 
+      objectReference: {fileID: 1060045796}
+    - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
       propertyPath: cameraInput
       value: 
       objectReference: {fileID: 911962081}
@@ -7695,11 +7700,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Physical Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 9213596846285240931, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

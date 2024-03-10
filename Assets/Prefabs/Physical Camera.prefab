@@ -584,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2985444785190642972
 Transform:
   m_ObjectHideFlags: 0
@@ -827,3 +827,4 @@ MonoBehaviour:
   viewCamera: {fileID: 7511872343393481504}
   lowestFocalLength: 20
   highestFocalLength: 200
+  zoomSlider: {fileID: 0}

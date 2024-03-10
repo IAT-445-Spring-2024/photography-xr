@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class PhysicalCamera: MonoBehaviour {
 
@@ -17,8 +18,11 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private Camera cameraFX;
     [SerializeField] private Camera viewCamera;
     [SerializeField] private float lowestFocalLength = 20f;
-    [SerializeField] private float highestFocalLength = 200;
+    [SerializeField] private float highestFocalLength = 200f;
     private DepthOfField depthOfField;
+
+    // TODO: This is not the best separation of concerns. 
+    [SerializeField] private Slider zoomSlider;
 
     private void Start() {
         RegisterShutterAction();
@@ -36,6 +40,7 @@ public class PhysicalCamera: MonoBehaviour {
         cameraFX.focalLength += 1 * zoomSpeed;
         viewCamera.focalLength += 1 * zoomSpeed;
         textMesh.text = "Zooming In";
+        UpdateSliderValue();
     }
 
     private void PerformZoomOut(object sender, EventArgs args) {
@@ -43,6 +48,12 @@ public class PhysicalCamera: MonoBehaviour {
         cameraFX.focalLength -= 1 * zoomSpeed;
         viewCamera.focalLength -= 1 * zoomSpeed;
         textMesh.text = "Zooming Out";
+        UpdateSliderValue();
+    }
+
+    private void UpdateSliderValue() {
+        float value = (cameraFX.focalLength - lowestFocalLength) / (highestFocalLength - lowestFocalLength);
+        zoomSlider.value = value;
     }
 
     private void RegisterShutterAction() {
