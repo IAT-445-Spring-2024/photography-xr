@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,9 +21,12 @@ public class MenuController : MonoBehaviour {
     private ISOOption isoOption;
     private Option activeOption;
     
-    // When animating
-    private Option targetOption = null;
+    // Animations
     [SerializeField] private float animationSpeed = 5f;
+
+    // Selection frame bounds
+    private Vector3 topPosition;
+    private Vector3 bottomPosition;
 
     private void Awake() {
         inputActions = new PlayerInputActions();
@@ -34,6 +39,9 @@ public class MenuController : MonoBehaviour {
         isoOption = new ISOOption(isoSlider, physicalCamera);
 
         activeOption = shutterOption;
+
+        topPosition = new Vector3(selectionFrame.transform.position.x, shutterSlider.transform.position.y, selectionFrame.transform.position.z);
+        bottomPosition = new Vector3(selectionFrame.transform.position.x, isoSlider.transform.position.y, selectionFrame.transform.position.z);
     }
 
     private void Update() {
@@ -51,8 +59,6 @@ public class MenuController : MonoBehaviour {
             dotProductPairRight
         });
 
-        Option optionTargetedByIntentionVector = OptionTargeted(intentionVector);
-
         // Adjusting values
         if (intentionVector == Vector2.left) {
             activeOption.SwitchToLeftValue(adjustmentVector.magnitude * Time.deltaTime);
@@ -60,66 +66,61 @@ public class MenuController : MonoBehaviour {
             activeOption.SwitchToRightValue(adjustmentVector.magnitude * Time.deltaTime);
         } 
         
-        // Set target option if intention has updated
-        // The target would either be null or another value initially
-        else if (optionTargetedByIntentionVector != targetOption) {
-            bool isSelectingOption = intentionVector == Vector2.up || intentionVector == Vector2.down;
-            if (isSelectingOption && adjustmentVector.magnitude >= 0.3){
-                targetOption = optionTargetedByIntentionVector;
-            }
-        }
-        
-        if (targetOption != null) {
-            // Keep completing the animation and set the active option when done
-            Transform currentTransform = selectionFrame.transform;
-            Vector3 targetPosition = new(
-                currentTransform.position.x, 
-                targetOption.GetTransformY(), 
-                currentTransform.position.z
-            );
-            
+        // Updating options
+        else if (adjustmentVector != Vector2.zero) {
+            Vector3 targetPosition = intentionVector == Vector2.up ? topPosition : bottomPosition;
             selectionFrame.transform.position = Vector3.Lerp(
-                selectionFrame.transform.position, 
-                targetPosition, 
+                selectionFrame.transform.position,
+                targetPosition,
                 Time.deltaTime * animationSpeed
             );
-
-            if (selectionFrame.transform.position == targetPosition) {
+        } else if (adjustmentVector == Vector2.zero) {
+            Option targetOption = CloestOption(selectionFrame.transform.position);
+            Vector3 targetPosition = new Vector3(
+                selectionFrame.transform.position.x, 
+                targetOption.GetTransformY(), 
+                selectionFrame.transform.position.z
+            );
+            selectionFrame.transform.position = Vector3.Lerp(
+                selectionFrame.transform.position,
+                targetPosition,
+                Time.deltaTime * animationSpeed * 2
+            );
+            if (Math.Abs(selectionFrame.transform.position.y - targetPosition.y) < 0.0001) {
                 activeOption = targetOption;
-                targetOption = null;
             }
         }
     }
 
-    private Option OptionTargeted(Vector2 byVector) {
-        if (byVector == Vector2.up) {
-            if (activeOption.ParameterType == Option.Type.Shutter) {
-                return null;
-            } else if (activeOption.ParameterType == Option.Type.Aperture) {
-                return shutterOption;
-            } else if (activeOption.ParameterType == Option.Type.ISO) {
-                return apertureOption;
-            }
-        } else if (byVector == Vector2.down) {
-            if (activeOption.ParameterType == Option.Type.Shutter) {
-                return apertureOption;
-            } else if (activeOption.ParameterType == Option.Type.Aperture) {
-                return isoOption;
-            } else if (activeOption.ParameterType == Option.Type.ISO) {
-                return null;
-            }
+    private Option CloestOption(Vector3 toPosition) {
+        float minDistance = float.MaxValue;
+        Option cloestOption = activeOption;
+
+        float distance = Math.Abs(toPosition.y - shutterOption.GetTransformY());
+        if (distance < minDistance) {
+            cloestOption = shutterOption;
+            minDistance = distance;
         }
 
-        return null;
+        distance = Math.Abs(toPosition.y - apertureOption.GetTransformY());
+        if (distance < minDistance) {
+            cloestOption = apertureOption;
+            minDistance = distance;
+        }
+
+        distance = Math.Abs(toPosition.y - isoOption.GetTransformY());
+        if (distance < minDistance) {
+            cloestOption = isoOption;
+            minDistance = distance;
+        }
+
+        return cloestOption;
     }
 
     private Vector2 VectorWithLargestDotProduct((Vector2, float)[] vectorProductPairs) {
-        float maxDotProduct = float.MinValue;
+        float maxDotProduct = 0f;
         Vector2 resultingVector = Vector2.zero;
         foreach ((var vector, var product) in vectorProductPairs) {
-            //Debug.Log("Comparing:");
-            //Debug.Log(product);
-            //Debug.Log(maxDotProduct);
             if (product > maxDotProduct) {
                 maxDotProduct = product;
                 resultingVector = vector;
