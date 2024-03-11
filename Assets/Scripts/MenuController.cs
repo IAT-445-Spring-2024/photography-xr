@@ -26,8 +26,13 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private float animationSpeed = 5f;
 
     // Selection frame bounds
-    private Vector3 topPosition;
-    private Vector3 bottomPosition;
+    private Vector3 TopPosition() {
+        return shutterOption.GetPosition();
+    }
+    
+    private Vector3 BottomPosition() {
+        return isoOption.GetPosition();
+    }
 
     private void Awake() {
         inputActions = new PlayerInputActions();
@@ -40,9 +45,6 @@ public class MenuController : MonoBehaviour {
         isoOption = new ISOOption(isoSlider, physicalCamera);
 
         activeOption = shutterOption;
-
-        topPosition = new Vector3(selectionFrame.transform.position.x, shutterSlider.transform.position.y, selectionFrame.transform.position.z);
-        bottomPosition = new Vector3(selectionFrame.transform.position.x, isoSlider.transform.position.y, selectionFrame.transform.position.z);
     }
 
     private void Update() {
@@ -70,7 +72,7 @@ public class MenuController : MonoBehaviour {
         // Updating options
         bool isChangingOption = intentionVector == Vector2.up || intentionVector == Vector2.down;
         if (isChangingOption) {
-            Vector3 targetPosition = intentionVector == Vector2.up ? topPosition : bottomPosition;
+            Vector3 targetPosition = intentionVector == Vector2.up ? TopPosition() : BottomPosition();
             selectionFrame.transform.position = Vector3.Lerp(
                 selectionFrame.transform.position,
                 targetPosition,
@@ -78,11 +80,7 @@ public class MenuController : MonoBehaviour {
             );
         } else {
             Option targetOption = CloestOption(selectionFrame.transform.position);
-            Vector3 targetPosition = new Vector3(
-                selectionFrame.transform.position.x, 
-                targetOption.GetTransformY(), 
-                selectionFrame.transform.position.z
-            );
+            Vector3 targetPosition = targetOption.GetPosition();
             // TODO: To make it smoother, consider the final velocity of the last motion.
             selectionFrame.transform.position = Vector3.Lerp(
                 selectionFrame.transform.position,
@@ -99,19 +97,19 @@ public class MenuController : MonoBehaviour {
         float minDistance = float.MaxValue;
         Option cloestOption = activeOption;
 
-        float distance = Math.Abs(toPosition.y - shutterOption.GetTransformY());
+        float distance = Vector3.Distance(toPosition, shutterOption.GetPosition());
         if (distance < minDistance) {
             cloestOption = shutterOption;
             minDistance = distance;
         }
 
-        distance = Math.Abs(toPosition.y - apertureOption.GetTransformY());
+        distance = Vector3.Distance(toPosition, apertureOption.GetPosition());
         if (distance < minDistance) {
             cloestOption = apertureOption;
             minDistance = distance;
         }
 
-        distance = Math.Abs(toPosition.y - isoOption.GetTransformY());
+        distance = Vector3.Distance(toPosition, isoOption.GetPosition());
         if (distance < minDistance) {
             cloestOption = isoOption;
             minDistance = distance;
@@ -142,7 +140,7 @@ public class MenuController : MonoBehaviour {
 
         abstract public Type ParameterType { get; }
 
-        abstract public float GetTransformY();
+        abstract public Vector3 GetPosition();
 
         abstract public void SwitchToLeftValue(float byAmount);
 
@@ -165,8 +163,8 @@ public class MenuController : MonoBehaviour {
             this.camera = camera;
         }
 
-        public override float GetTransformY() {
-            return slider.transform.position.y;
+        public override Vector3 GetPosition() {
+            return slider.transform.parent.transform.position;
         }
 
         public override void SwitchToLeftValue(float byAmount) {
@@ -201,8 +199,8 @@ public class MenuController : MonoBehaviour {
             this.camera = camera;
         }
 
-        public override float GetTransformY() {
-            return slider.transform.position.y;
+        public override Vector3 GetPosition() {
+            return slider.transform.parent.transform.position;
         }
 
         public override void SwitchToLeftValue(float byAmount) {
@@ -237,8 +235,8 @@ public class MenuController : MonoBehaviour {
             this.camera = camera;
         }
 
-        public override float GetTransformY() {
-            return slider.transform.position.y;
+        public override Vector3 GetPosition() {
+            return slider.transform.parent.transform.position;
         }
 
         public override void SwitchToLeftValue(float byAmount) {
