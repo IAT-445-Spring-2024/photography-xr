@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/RoomDemoScene.unity
     guid: d08a19c0c8cab44658efd80a8a74f09f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StudioScene.unity
     guid: a252fb75534e641b2a91191e3d9a87ec
+  - enabled: 1
+    path: Assets/Scenes/ForestScene.unity
+    guid: 00717cbd901444384a936703265afe84
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3d1bd02694b9b4381b51fb7fa07a2eb3,
       type: 2}
