@@ -48,16 +48,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistanceFogIntensity: 0.694
+    - _DistanceFogIntensity: 1
     - _DistanceHeightBlend: 0.251
     - _Far: 150
-    - _HeightFogIntensity: 0.631
+    - _HeightFogIntensity: 1
     - _HighWorldY: 35
     - _LowWorldY: 0
     - _Near: 27
     m_Colors: []
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,9 +72,9 @@ MonoBehaviour:
   useDistance: 1
   distanceGradient:
     serializedVersion: 2
-    key0: {r: 0, g: 0.85213137, b: 1, a: 0.09803922}
-    key1: {r: 1, g: 0.99326676, b: 0.5707547, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 1}
+    key0: {r: 0.5294118, g: 0.25490198, b: 0.11764707, a: 0.09803922}
+    key1: {r: 0.8745099, g: 0.5764706, b: 0.3529412, a: 0.15686275}
+    key2: {r: 0, g: 0, b: 0, a: 0.08627451}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -98,18 +97,18 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: -1
+    m_ColorSpace: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 3
   near: 27
   far: 150
-  distanceFogIntensity: 0.694
+  distanceFogIntensity: 1
   useHeight: 1
   heightGradient:
     serializedVersion: 2
-    key0: {r: 0.0745098, g: 0.94509804, b: 0.9280485, a: 0}
-    key1: {r: 0, g: 0.848485, b: 1, a: 1}
-    key2: {r: 0.6634565, g: 0.94509804, b: 0.0745098, a: 1}
+    key0: {r: 0.6, g: 0.39607847, b: 0.27450982, a: 0}
+    key1: {r: 0.90196085, g: 0.5882353, b: 0.3529412, a: 0.32941177}
+    key2: {r: 0.9960785, g: 0.909804, b: 0.7058824, a: 0.17254902}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -132,12 +131,12 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: -1
+    m_ColorSpace: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
   low: 0
   high: 35
-  heightFogIntensity: 0.631
+  heightFogIntensity: 1
   cameraRelativePosition: 0
   distanceHeightBlend: 0.251
   renderEvent: 550
