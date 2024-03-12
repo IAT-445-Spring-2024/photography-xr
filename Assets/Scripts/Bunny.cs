@@ -5,7 +5,10 @@ using UnityEngine.AI;
 
 public class Bunny : MonoBehaviour {
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private float searchRange = 10.0f;
+    [SerializeField] private float searchRange = 3.0f;
+    [SerializeField] private float waitTime = 10.0f;
+    [SerializeField] private Animator animator;
+    private const string IS_WALKING = "IsWalking";
     private float timer = 0f;
 
     private void Update() {
@@ -13,10 +16,14 @@ public class Bunny : MonoBehaviour {
             Vector3 destination;
             if (RandomPoint(transform.position, searchRange, out destination)) {
                 navMeshAgent.SetDestination(destination);
+                animator.SetBool(IS_WALKING, true);
             }
             timer += Time.deltaTime;
         } else {
-            if (timer > 5f) {
+            if (navMeshAgent.destination == navMeshAgent.transform.position) {
+                animator.SetBool(IS_WALKING, false);
+            }
+            if (timer > waitTime) {
                 timer = 0f;
             } else {
                 timer += Time.deltaTime;
