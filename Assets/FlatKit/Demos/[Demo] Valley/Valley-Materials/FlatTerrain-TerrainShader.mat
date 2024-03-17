@@ -14,10 +14,10 @@ Material:
   m_ValidKeywords:
   - DR_GRADIENT_ON
   - _CELPRIMARYMODE_SINGLE
+  - _UNITYSHADOWMODE_COLOR
   m_InvalidKeywords:
   - _OVERRIDE_SHADOWS_ENABLED
   - _SECONDARY_COLOR_ENABLED
-  - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -198,7 +198,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UnityShadowMode: 0
+    - _UnityShadowMode: 2
     - _UnityShadowPower: 0.2
     - _UnityShadowSharpness: 1
     - _ZWrite: 1
@@ -217,5 +217,5 @@ Material:
     - _FlatRimColor: {r: 1, g: 1, b: 1, a: 1}
     - _FlatSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _UnityShadowColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+    - _UnityShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
