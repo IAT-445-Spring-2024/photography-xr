@@ -24,8 +24,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _DirectionPitch: 80
+    - _DirectionYaw: 0
+    - _Intensity: 1.45
     m_Colors:
     - _Color1: {r: 0.2901961, g: 0.4901961, b: 0.5568628, a: 0}
     - _Color2: {r: 0.5568628, g: 0.6901961, b: 0.6666667, a: 0}
+    - _Direction: {r: 0, g: 0.17364822, b: 0.9848077, a: 0}
   m_BuildTextureStacks: []
