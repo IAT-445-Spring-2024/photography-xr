@@ -185,7 +185,7 @@ public class MenuController : MonoBehaviour {
     class ApertureOption: Option {
         private readonly Slider slider;
         private readonly Camera camera;
-        private readonly float adjustmentSpeed = 0.01f;
+        private readonly float adjustmentSpeed = 1f;
 
         private float GetApertureFromSliderValue() {
             // TODO: Update this formula. 
@@ -221,7 +221,7 @@ public class MenuController : MonoBehaviour {
     class ISOOption: Option {
         private readonly Slider slider;
         private readonly Camera camera;
-        private readonly float adjustmentSpeed = 0.01f;
+        private readonly float adjustmentSpeed = 1f;
 
         private float GetISOFromSliderValue() {
             // TODO: Update this formula. 
