@@ -32,7 +32,7 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private GameObject photoPrintAnchor;
     private GameObject photoPrinting;
     [SerializeField] private float printSpeed = 1f;
-    [SerializeField] private float printOffset = 5f;
+    [SerializeField] private float printOffset = 0.1f;
 
     private void Start() {
         RegisterShutterAction();
@@ -57,6 +57,12 @@ public class PhysicalCamera: MonoBehaviour {
                 color.a = 1 - (distanceToStartFade - absoluteDistance);
                 photoPrinting.GetComponent<Renderer>().material.color = color;
             }
+        }
+
+        // ERROR: For debugging only. Remove after finished.
+        if (Input.GetKeyDown("space")) {
+            Debug.Log("Testing photo taking.");
+            CaptureImage();
         }
     }
 
