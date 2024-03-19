@@ -32,7 +32,7 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private GameObject photoPrintAnchor;
     private GameObject photoPrinting;
     [SerializeField] private float printSpeed = 1f;
-    [SerializeField] private float printOffset = 0.1f;
+    [SerializeField] private float printOffset = 0.12f;
 
     private void Start() {
         RegisterShutterAction();
@@ -44,6 +44,7 @@ public class PhysicalCamera: MonoBehaviour {
         if (photoPrinting != null) {
             Vector3 targetDestination = photoPrintAnchor.transform.localPosition;
             targetDestination.y += printOffset;
+            targetDestination.z = 0.001f;
             photoPrinting.transform.localPosition = Vector3.Lerp(
                 photoPrinting.transform.localPosition,
                 targetDestination,
@@ -131,7 +132,7 @@ public class PhysicalCamera: MonoBehaviour {
         byte[] bytes = image.EncodeToPNG();
         // Destroy(image);
 
-        string filePath = Application.dataPath + "photos" + currentFileNumber + ".png";
+        string filePath = Application.persistentDataPath + "photo" + currentFileNumber + ".png";
         File.WriteAllBytes(filePath, bytes);
         currentFileNumber += 1;
         PrintPhoto(image);
@@ -140,7 +141,8 @@ public class PhysicalCamera: MonoBehaviour {
     private void PrintPhoto(Texture2D imageTexture) {
         photoPrinting = Instantiate(printedPhotoPrefab);
         photoPrinting.transform.SetParent(transform);
-        photoPrinting.transform.localPosition = photoPrintAnchor.transform.localPosition;
+        photoPrinting.transform.position = photoPrintAnchor.transform.position;
+        photoPrinting.transform.localRotation = Quaternion.identity;
         photoPrinting.GetComponent<Renderer>().material.mainTexture = imageTexture;
     }
 }
