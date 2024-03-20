@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17246553, g: 0.38026848, b: 0.43973836, a: 1}
+  m_IndirectSpecularColor: {r: 0.17256127, g: 0.38043243, b: 0.44000083, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1420,7 +1420,7 @@ PrefabInstance:
     - target: {fileID: 2894950319296682889, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2985444785190642972, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
@@ -1481,6 +1481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Debug Message
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970139698277540310, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
@@ -1701,11 +1706,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2894950319296682889, guid: f910cd0bedba14e25b097e756298a7d2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f910cd0bedba14e25b097e756298a7d2, type: 3}
 --- !u!1001 &991467083
 PrefabInstance:
