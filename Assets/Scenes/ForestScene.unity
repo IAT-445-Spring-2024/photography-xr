@@ -237,6 +237,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &146929162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4300365821263201800, guid: f910cd0bedba14e25b097e756298a7d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 562873398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &157267315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,6 +1417,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2894950319296682889, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2985444785190642972, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1466,11 +1477,37 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3531447327149743459, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_text
+      value: Debug Message
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970139698277540310, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: volume
       value: 
       objectReference: {fileID: 991467084}
+    - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: printOffset
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: photoPrintAnchor
+      value: 
+      objectReference: {fileID: 146929162}
+    - target: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: printedPhotoPrefab
+      value: 
+      objectReference: {fileID: 5809776571862892210, guid: 0c0fea2892d38465b84fdb68895ef78c,
+        type: 3}
     - target: {fileID: 4502161701666078196, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1535,6 +1572,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031227549790473943, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031227549790473943, guid: f910cd0bedba14e25b097e756298a7d2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7168746345891560241, guid: f910cd0bedba14e25b097e756298a7d2,
         type: 3}

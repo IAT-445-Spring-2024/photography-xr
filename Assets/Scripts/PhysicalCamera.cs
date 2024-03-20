@@ -7,6 +7,8 @@ using UnityEngine.Rendering;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using System.IO;
+using Unity.VisualScripting;
 
 public class PhysicalCamera: MonoBehaviour {
 
@@ -24,10 +26,45 @@ public class PhysicalCamera: MonoBehaviour {
     // TODO: This is not the best separation of concerns. 
     [SerializeField] private Slider zoomSlider;
 
+    // MARK: Image Capture Properties
+    private int currentFileNumber = 0;
+    [SerializeField] private GameObject printedPhotoPrefab;
+    [SerializeField] private GameObject photoPrintAnchor;
+    private GameObject photoPrinting;
+    [SerializeField] private float printSpeed = 1f;
+    [SerializeField] private float printOffset = 0.12f;
+
     private void Start() {
         RegisterShutterAction();
         RegisterControls();
         RegisterEffects();
+    }
+    
+    private void Update() {
+        if (photoPrinting != null) {
+            Vector3 targetDestination = photoPrintAnchor.transform.localPosition;
+            targetDestination.y += printOffset;
+            targetDestination.z = 0.001f;
+            photoPrinting.transform.localPosition = Vector3.Lerp(
+                photoPrinting.transform.localPosition,
+                targetDestination,
+                Time.deltaTime * printSpeed
+            );
+
+            float absoluteDistance = Vector3.Distance(targetDestination, photoPrinting.transform.localPosition);
+            float distanceToStartFade = 0.1f;
+            if (absoluteDistance < distanceToStartFade) {
+                Color color = photoPrinting.GetComponent<Renderer>().material.color;
+                color.a = 1 - (distanceToStartFade - absoluteDistance);
+                photoPrinting.GetComponent<Renderer>().material.color = color;
+            }
+        }
+
+        // ERROR: For debugging only. Remove after finished.
+        if (Input.GetKeyDown("space")) {
+            Debug.Log("Testing photo taking.");
+            CaptureImage();
+        }
     }
 
     private void RegisterControls() {
@@ -66,8 +103,9 @@ public class PhysicalCamera: MonoBehaviour {
     }
 
     private void OnActivate(ActivateEventArgs args) {
-        // TODO: Take photo.
+        // TODO: update action.
         textMesh.text = "Took Photo";
+        CaptureImage();
     }
 
     private void FixedUpdate() {
@@ -78,5 +116,33 @@ public class PhysicalCamera: MonoBehaviour {
             depthOfField.focusDistance.value += Time.deltaTime * (hitDistance - currentFocusDistance) * focusSpeed;
             // textMesh.text = hitDistance.ToString();
         }
+    }
+
+    // MARK: - Image Capture
+    private void CaptureImage() {
+        RenderTexture activeRenderTexture = RenderTexture.active;
+        RenderTexture.active = cameraFX.targetTexture;
+        cameraFX.Render();
+
+        Texture2D image = new(cameraFX.targetTexture.width, cameraFX.targetTexture.height);
+        image.ReadPixels(new Rect(0, 0, cameraFX.targetTexture.width, cameraFX.targetTexture.height), 0, 0);
+        image.Apply();
+        RenderTexture.active = activeRenderTexture;
+
+        byte[] bytes = image.EncodeToPNG();
+        // Destroy(image);
+
+        string filePath = Application.persistentDataPath + "photo" + currentFileNumber + ".png";
+        File.WriteAllBytes(filePath, bytes);
+        currentFileNumber += 1;
+        PrintPhoto(image);
+    }
+
+    private void PrintPhoto(Texture2D imageTexture) {
+        photoPrinting = Instantiate(printedPhotoPrefab);
+        photoPrinting.transform.SetParent(transform);
+        photoPrinting.transform.position = photoPrintAnchor.transform.position;
+        photoPrinting.transform.localRotation = Quaternion.identity;
+        photoPrinting.GetComponent<Renderer>().material.mainTexture = imageTexture;
     }
 }
