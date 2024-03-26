@@ -44,7 +44,6 @@ public class PhysicalCamera: MonoBehaviour {
         if (photoPrinting != null) {
             Vector3 targetDestination = photoPrintAnchor.transform.localPosition;
             targetDestination.y += printOffset;
-            targetDestination.z = 0.001f;
             photoPrinting.transform.localPosition = Vector3.Lerp(
                 photoPrinting.transform.localPosition,
                 targetDestination,
@@ -53,6 +52,8 @@ public class PhysicalCamera: MonoBehaviour {
 
             float absoluteDistance = Vector3.Distance(targetDestination, photoPrinting.transform.localPosition);
             float distanceToStartFade = 0.1f;
+
+            // TODO: Fade and go to the other hand.
             if (absoluteDistance < distanceToStartFade) {
                 Color color = photoPrinting.GetComponent<Renderer>().material.color;
                 color.a = 1 - (distanceToStartFade - absoluteDistance);
