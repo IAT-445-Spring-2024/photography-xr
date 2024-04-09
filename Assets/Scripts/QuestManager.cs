@@ -28,24 +28,25 @@ public class QuestManager : MonoBehaviour {
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
+        UpdateQuestUI();
+    }
+
+    private void OnQuestComplete(Quest quest) {
+        identifierToCompletionStatus[quest.Identifier] = true;
+        UpdateQuestUI();
+    }
+
+    private void UpdateQuestUI() {
         Quest nextQuest = GetNextUncompletedQuest();
         if (nextQuest != null) {
-            UpdateQuestUI(nextQuest);
+            Display(nextQuest);
         } else {
             titleLabel.text = "You have completed all the quests!";
             descriptionLabel.text = "Check out the other scenes or your album.";
         }
     }
 
-    private void OnQuestComplete(Quest quest) {
-        identifierToCompletionStatus[quest.Identifier] = true;
-        Quest nextQuest = GetNextUncompletedQuest();
-        if (nextQuest != null) {
-            UpdateQuestUI(nextQuest);
-        }
-    }
-
-    private void UpdateQuestUI(Quest quest) {
+    private void Display(Quest quest) {
         titleLabel.text = quest.Title;
         descriptionLabel.text = quest.Description;
     }
