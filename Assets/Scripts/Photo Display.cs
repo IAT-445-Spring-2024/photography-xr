@@ -9,6 +9,7 @@ public class PhotoDisplay: MonoBehaviour {
     private int currentPhotoNumber = 0;
 
     private void OnEnable() {
+        currentPhotoNumber = physicalCamera.currentFileNumber;
         DisplayPhoto();
     }
 

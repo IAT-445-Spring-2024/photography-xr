@@ -3035,6 +3035,18 @@ CapsuleCollider:
   m_Height: 17.5
   m_Direction: 1
   m_Center: {x: 0, y: 8.5, z: 0}
+--- !u!114 &373629751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4053387507875002745, guid: f910cd0bedba14e25b097e756298a7d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 562873398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3003ceeffc0c44db2b2fdc4dee429558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &380402225
 GameObject:
   m_ObjectHideFlags: 0
@@ -7173,6 +7185,7 @@ GameObject:
   - component: {fileID: 922226629}
   - component: {fileID: 922226628}
   - component: {fileID: 922226627}
+  - component: {fileID: 922226630}
   m_Layer: 0
   m_Name: Photo Display
   m_TagString: Untagged
@@ -7267,6 +7280,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922226625}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &922226630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922226625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016803b75f6e241beb864bc03f4164f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicalCamera: {fileID: 373629751}
 --- !u!1 &922262955
 GameObject:
   m_ObjectHideFlags: 0
