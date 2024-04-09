@@ -7,6 +7,7 @@ public abstract class Quest: MonoBehaviour {
     public abstract string Identifier { get; }
     public abstract string Title { get; }
     public abstract string Description { get; }
+    public abstract int Order { get; }
     public event Action<Quest> OnComplete;
 
     private void OnEnable() {
