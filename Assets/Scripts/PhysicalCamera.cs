@@ -38,6 +38,25 @@ public class PhysicalCamera: MonoBehaviour {
         RegisterShutterAction();
         RegisterControls();
         RegisterEffects();
+        UpdateFileNumber();
+    }
+
+    private void UpdateFileNumber() {
+        // TODO: This is bad code. Change it if you have the chance. 
+        int i = 0;
+        
+        string filePath = Application.persistentDataPath + "photo" + i + ".png";
+        bool fileExists = File.Exists(filePath);
+
+        while (fileExists) {
+            i += 1;
+            filePath = Application.persistentDataPath + "photo" + i + ".png";
+            fileExists = File.Exists(filePath);
+        }
+
+        if (i != 0) {
+            currentFileNumber = i - 1;
+        }
     }
     
     private void Update() {
