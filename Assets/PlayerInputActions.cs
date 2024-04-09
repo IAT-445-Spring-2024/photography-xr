@@ -35,6 +35,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Show Album"",
+                    ""type"": ""Button"",
+                    ""id"": ""95b12561-1b7c-4238-8b29-b82ea99c081c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Adjust"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c0782c3-dcc7-47d0-8dcc-002af9a08ad9"",
+                    ""path"": ""<XRController>{LeftHand}/menu"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Show Album"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Adjust = m_Player.FindAction("Adjust", throwIfNotFound: true);
+        m_Player_ShowAlbum = m_Player.FindAction("Show Album", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +140,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Adjust;
+    private readonly InputAction m_Player_ShowAlbum;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Adjust => m_Wrapper.m_Player_Adjust;
+        public InputAction @ShowAlbum => m_Wrapper.m_Player_ShowAlbum;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +159,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Adjust.started += instance.OnAdjust;
             @Adjust.performed += instance.OnAdjust;
             @Adjust.canceled += instance.OnAdjust;
+            @ShowAlbum.started += instance.OnShowAlbum;
+            @ShowAlbum.performed += instance.OnShowAlbum;
+            @ShowAlbum.canceled += instance.OnShowAlbum;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -143,6 +169,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Adjust.started -= instance.OnAdjust;
             @Adjust.performed -= instance.OnAdjust;
             @Adjust.canceled -= instance.OnAdjust;
+            @ShowAlbum.started -= instance.OnShowAlbum;
+            @ShowAlbum.performed -= instance.OnShowAlbum;
+            @ShowAlbum.canceled -= instance.OnShowAlbum;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -163,5 +192,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnAdjust(InputAction.CallbackContext context);
+        void OnShowAlbum(InputAction.CallbackContext context);
     }
 }

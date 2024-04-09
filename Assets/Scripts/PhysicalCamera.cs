@@ -27,7 +27,7 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private Slider zoomSlider;
 
     // MARK: Image Capture Properties
-    private int currentFileNumber = 0;
+    public int currentFileNumber = 0;
     [SerializeField] private GameObject printedPhotoPrefab;
     [SerializeField] private GameObject photoPrintAnchor;
     private GameObject photoPrinting;
