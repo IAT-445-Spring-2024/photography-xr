@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class QuestDescriptionLabel : MonoBehaviour {
      private void OnEnable() {
-        QuestManager.Instance.RegisterDescriptionLabel(GetComponent<TextMeshPro>());
+        QuestManager.Instance.RegisterDescriptionLabel(GetComponent<TextMeshProUGUI>());
     }
 }

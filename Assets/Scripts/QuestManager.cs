@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour {
     public static QuestManager Instance { get; private set; }
     private List<Quest> activeQuests = new List<Quest>();
     private Dictionary<string, bool> identifierToCompletionStatus = new();
-    private TextMeshPro titleLabel;
-    private TextMeshPro descriptionLabel;
+    private TextMeshProUGUI titleLabel;
+    private TextMeshProUGUI descriptionLabel;
 
     private void Awake() {
         if (Instance == null) {
@@ -23,7 +23,11 @@ public class QuestManager : MonoBehaviour {
         }
     }
 
-    private void OnSceneActivated() {
+    private void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
         Quest nextQuest = GetNextUncompletedQuest();
         if (nextQuest != null) {
             UpdateQuestUI(nextQuest);
@@ -69,11 +73,11 @@ public class QuestManager : MonoBehaviour {
         }
     }
 
-    public void RegisterTitleLabel(TextMeshPro label) {
+    public void RegisterTitleLabel(TextMeshProUGUI label) {
         titleLabel = label;
     }
 
-    public void RegisterDescriptionLabel(TextMeshPro label) {
+    public void RegisterDescriptionLabel(TextMeshProUGUI label) {
         descriptionLabel = label;
     }
 
