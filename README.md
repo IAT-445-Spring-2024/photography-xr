@@ -18,3 +18,6 @@
 - https://www.youtube.com/results?search_query=unity+take+photo+in+game+
 - https://www.youtube.com/watch?v=7od2j4s85ww
 - https://www.youtube.com/watch?v=0xt6dACM_1I&list=PLpEoiloH-4eP-OKItF8XNJ8y8e1asOJud&index=6
+- https://forum.unity.com/threads/changing-textmeshpro-text-from-ui-via-script.462250/
+- https://stackoverflow.com/questions/326223/overriding-fields-or-properties-in-subclasses
+- https://stackoverflow.com/questions/1689279/c-sharp-events-without-arguments-how-do-i-handle-them
