@@ -13,14 +13,14 @@ public class PhotoDisplay: MonoBehaviour {
         DisplayPhoto();
     }
 
-    private void DisplayNextPhoto() {
+    public void DisplayNextPhoto() {
         if (currentPhotoNumber < physicalCamera.currentFileNumber) {
             currentPhotoNumber += 1;
         }
         DisplayPhoto();
     }
 
-    private void DisplayPreviousPhoto() {
+    public void DisplayPreviousPhoto() {
         if (currentPhotoNumber > 0) {
             currentPhotoNumber -= 1;
         }

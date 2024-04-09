@@ -11,9 +11,19 @@ public class TabletControls: MonoBehaviour {
         inputActions = new PlayerInputActions();
         inputActions.Player.Enable();
         inputActions.Player.ShowAlbum.performed += OnMenuPressed;
+        inputActions.Player.PreviousPhoto.performed += OnYPressed;
+        inputActions.Player.NextPhoto.performed += OnXPressed;
     }
 
     private void OnMenuPressed(InputAction.CallbackContext context) {
         photoDisplay.SetActive(!photoDisplay.activeSelf);
+    }
+
+    private void OnYPressed(InputAction.CallbackContext context) {
+        photoDisplay.GetComponent<PhotoDisplay>().DisplayPreviousPhoto();
+    }
+
+    private void OnXPressed(InputAction.CallbackContext context) {
+        photoDisplay.GetComponent<PhotoDisplay>().DisplayNextPhoto();
     }
 }
