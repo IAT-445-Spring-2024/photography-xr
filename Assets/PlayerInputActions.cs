@@ -35,6 +35,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Show Album"",
+                    ""type"": ""Button"",
+                    ""id"": ""95b12561-1b7c-4238-8b29-b82ea99c081c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Previous Photo"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fe20109-ef17-42de-b809-2d5f9f772074"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Next Photo"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b56099c-f1ce-4d94-a8de-08a8f5dd8ede"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +75,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Adjust"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c0782c3-dcc7-47d0-8dcc-002af9a08ad9"",
+                    ""path"": ""<XRController>{LeftHand}/menu"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Show Album"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f72784c1-7252-4a3f-affb-5d1915772c54"",
+                    ""path"": ""<XRController>{LeftHand}/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous Photo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32f08ec4-149e-4909-817c-602b2c680a53"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Photo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +117,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Adjust = m_Player.FindAction("Adjust", throwIfNotFound: true);
+        m_Player_ShowAlbum = m_Player.FindAction("Show Album", throwIfNotFound: true);
+        m_Player_PreviousPhoto = m_Player.FindAction("Previous Photo", throwIfNotFound: true);
+        m_Player_NextPhoto = m_Player.FindAction("Next Photo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +182,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Adjust;
+    private readonly InputAction m_Player_ShowAlbum;
+    private readonly InputAction m_Player_PreviousPhoto;
+    private readonly InputAction m_Player_NextPhoto;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Adjust => m_Wrapper.m_Player_Adjust;
+        public InputAction @ShowAlbum => m_Wrapper.m_Player_ShowAlbum;
+        public InputAction @PreviousPhoto => m_Wrapper.m_Player_PreviousPhoto;
+        public InputAction @NextPhoto => m_Wrapper.m_Player_NextPhoto;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +205,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Adjust.started += instance.OnAdjust;
             @Adjust.performed += instance.OnAdjust;
             @Adjust.canceled += instance.OnAdjust;
+            @ShowAlbum.started += instance.OnShowAlbum;
+            @ShowAlbum.performed += instance.OnShowAlbum;
+            @ShowAlbum.canceled += instance.OnShowAlbum;
+            @PreviousPhoto.started += instance.OnPreviousPhoto;
+            @PreviousPhoto.performed += instance.OnPreviousPhoto;
+            @PreviousPhoto.canceled += instance.OnPreviousPhoto;
+            @NextPhoto.started += instance.OnNextPhoto;
+            @NextPhoto.performed += instance.OnNextPhoto;
+            @NextPhoto.canceled += instance.OnNextPhoto;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -143,6 +221,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Adjust.started -= instance.OnAdjust;
             @Adjust.performed -= instance.OnAdjust;
             @Adjust.canceled -= instance.OnAdjust;
+            @ShowAlbum.started -= instance.OnShowAlbum;
+            @ShowAlbum.performed -= instance.OnShowAlbum;
+            @ShowAlbum.canceled -= instance.OnShowAlbum;
+            @PreviousPhoto.started -= instance.OnPreviousPhoto;
+            @PreviousPhoto.performed -= instance.OnPreviousPhoto;
+            @PreviousPhoto.canceled -= instance.OnPreviousPhoto;
+            @NextPhoto.started -= instance.OnNextPhoto;
+            @NextPhoto.performed -= instance.OnNextPhoto;
+            @NextPhoto.canceled -= instance.OnNextPhoto;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -163,5 +250,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnAdjust(InputAction.CallbackContext context);
+        void OnShowAlbum(InputAction.CallbackContext context);
+        void OnPreviousPhoto(InputAction.CallbackContext context);
+        void OnNextPhoto(InputAction.CallbackContext context);
     }
 }
