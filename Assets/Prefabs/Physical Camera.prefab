@@ -4544,7 +4544,7 @@ Transform:
   m_GameObject: {fileID: 7301019481333979332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08, y: -0, z: 0.063}
+  m_LocalPosition: {x: 0.08, y: -0, z: 0.018}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5934,7 +5934,7 @@ MonoBehaviour:
   zoomSlider: {fileID: 8723604744588879192}
   printedPhotoPrefab: {fileID: 5809776571862892210, guid: 0c0fea2892d38465b84fdb68895ef78c,
     type: 3}
-  photoPrintAnchor: {fileID: 4300365821263201800}
+  photoPrintAnchor: {fileID: 7301019481333979332}
   printSpeed: 1
   printOffset: 0.12
 --- !u!1001 &3868591543722354546

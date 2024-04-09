@@ -51,13 +51,18 @@ public class PhysicalCamera: MonoBehaviour {
             );
 
             float absoluteDistance = Vector3.Distance(targetDestination, photoPrinting.transform.localPosition);
-            float distanceToStartFade = 0.1f;
+            float distanceToStartFade = 0.001f;
 
-            // TODO: Fade and go to the other hand.
             if (absoluteDistance < distanceToStartFade) {
                 Color color = photoPrinting.GetComponent<Renderer>().material.color;
-                color.a = 1 - (distanceToStartFade - absoluteDistance);
+                Debug.Log("absoluteDistance: " + absoluteDistance);
+                color.a = 1 - (distanceToStartFade - absoluteDistance) * 2f / distanceToStartFade;
                 photoPrinting.GetComponent<Renderer>().material.color = color;
+
+                if (color.a <= 0.001) {
+                    Destroy(photoPrinting);
+                    photoPrinting = null;
+                }
             }
         }
 
@@ -140,6 +145,9 @@ public class PhysicalCamera: MonoBehaviour {
     }
 
     private void PrintPhoto(Texture2D imageTexture) {
+        if (photoPrinting != null) {
+            Destroy(photoPrinting);
+        }
         photoPrinting = Instantiate(printedPhotoPrefab);
         photoPrinting.transform.SetParent(transform);
         photoPrinting.transform.position = photoPrintAnchor.transform.position;
