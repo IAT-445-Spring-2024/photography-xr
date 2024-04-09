@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[Serializable]
-public class Quest {
-    public string title;
-    public string description;
-    public bool isCompleted = false;
-    public Func<bool> CheckCompletion;
+public abstract class Quest: MonoBehaviour {
+    public abstract string Identifier { get; }
+    public abstract string Title { get; }
+    public abstract string Description { get; }
+    public event Action<Quest> OnComplete;
 
-    public Quest(string title, string description, Func<bool> CheckCompletion) {
-        this.title = title;
-        this.description = description;
-        this.CheckCompletion = CheckCompletion;
+    private void OnEnable() {
+        QuestManager.Instance.RegisterQuest(this);
+    }
+
+    private void OnDisable() {
+        QuestManager.Instance.DeregisterQuest(this);
     }
 }
