@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 202821338258147258}
   - component: {fileID: 6038813668857266354}
   - component: {fileID: 7733659246483612187}
-  - component: {fileID: 727019514212561605}
+  - component: {fileID: 3647184044544905859}
   m_Layer: 0
   m_Name: Scene Display
   m_TagString: Untagged
@@ -789,7 +789,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &727019514212561605
+--- !u!114 &3647184044544905859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -798,10 +798,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3372909672219027935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 016803b75f6e241beb864bc03f4164f6, type: 3}
+  m_Script: {fileID: 11500000, guid: db7c5a7efcde944e187e04e6c9f3c819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicalCamera: {fileID: 0}
+  selectedSceneSO: {fileID: 11400000, guid: 83a1b51764b5943b3a67f9a3a6b0ee5f, type: 2}
+  sceneSOs:
+  - {fileID: 11400000, guid: e44295df8d98041c4a004d5fb12851af, type: 2}
+  - {fileID: 11400000, guid: 83a1b51764b5943b3a67f9a3a6b0ee5f, type: 2}
+  - {fileID: 11400000, guid: fe59828723b6e4ae1b0fc68c482ffdc2, type: 2}
+  - {fileID: 11400000, guid: 26f2ea14a527f44cfabffcc0e202e202, type: 2}
 --- !u!1 &3615632410613584293
 GameObject:
   m_ObjectHideFlags: 0

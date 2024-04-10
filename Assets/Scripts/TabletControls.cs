@@ -31,7 +31,7 @@ public class TabletControls: MonoBehaviour {
 
     private void OnTriggerPressed(InputAction.CallbackContext context) {
         if (sceneDisplay.activeSelf) {
-            transitionManager.Transition(1);
+            transitionManager.Transition(sceneDisplay.GetComponent<SceneDisplay>().selectedSceneSO.index);
         }
     }
 
@@ -39,7 +39,7 @@ public class TabletControls: MonoBehaviour {
         if (photoDisplay.activeSelf) {
             photoDisplay.GetComponent<PhotoDisplay>().DisplayPreviousPhoto();
         } else if (sceneDisplay.activeSelf) {
-
+            sceneDisplay.GetComponent<SceneDisplay>().SelectPreviousScene();
         }
     }
 
@@ -47,7 +47,7 @@ public class TabletControls: MonoBehaviour {
         if (photoDisplay.activeSelf) {
             photoDisplay.GetComponent<PhotoDisplay>().DisplayNextPhoto();
         } else if (sceneDisplay.activeSelf) {
-            
+            sceneDisplay.GetComponent<SceneDisplay>().SelectNextScene();
         }
     }
 }
