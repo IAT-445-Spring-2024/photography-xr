@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
@@ -14,6 +16,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField] private Slider shutterSlider;
     [SerializeField] private Slider apertureSlider;
     [SerializeField] private Slider isoSlider;
+    [SerializeField] private Volume volume;
 
     private PlayerInputActions inputActions;
 
@@ -40,8 +43,8 @@ public class MenuController : MonoBehaviour {
     }
 
     private void Start() {
-        shutterOption = new ShutterOption(shutterSlider, physicalCamera);
-        apertureOption = new ApertureOption(apertureSlider, physicalCamera);
+        shutterOption = new ShutterOption(shutterSlider, physicalCamera, volume);
+        apertureOption = new ApertureOption(apertureSlider, physicalCamera, volume);
         isoOption = new ISOOption(isoSlider, physicalCamera);
 
         activeOption = shutterOption;
@@ -151,16 +154,22 @@ public class MenuController : MonoBehaviour {
         private readonly Slider slider;
         private readonly Camera camera;
         private readonly float adjustmentSpeed = 1f;
+        private Volume volume;
+        private MotionBlur motionBlur;
+        private float maxValue = 2f;
+        private float minValue = 1 / 300f;
 
         private float GetShutterSpeedFromSliderValue() {
-            return slider.value / 1000;
+            return slider.value * (maxValue - minValue) + minValue;
         }
 
         override public Type ParameterType { get { return Type.Shutter; } }
 
-        public ShutterOption(Slider slider, Camera camera) {
+        public ShutterOption(Slider slider, Camera camera, Volume volume) {
             this.slider = slider;
             this.camera = camera;
+            this.volume = volume;
+            volume.profile.TryGet<MotionBlur>(out motionBlur);
         }
 
         public override Vector3 GetPosition() {
@@ -172,6 +181,7 @@ public class MenuController : MonoBehaviour {
                 slider.value -= byAmount * adjustmentSpeed;
             }
             camera.shutterSpeed = GetShutterSpeedFromSliderValue();
+            motionBlur.intensity.value = slider.value;
         }
 
         public override void SwitchToRightValue(float byAmount) {
@@ -179,24 +189,32 @@ public class MenuController : MonoBehaviour {
                 slider.value += byAmount * adjustmentSpeed;
             }
             camera.shutterSpeed = GetShutterSpeedFromSliderValue();
+            motionBlur.intensity.value = slider.value;
         }
     }
 
     class ApertureOption: Option {
         private readonly Slider slider;
         private readonly Camera camera;
+        private Volume volume;
         private readonly float adjustmentSpeed = 1f;
+        private DepthOfField depthOfField;
+
+        private float maxValue = 1f / 1.6f;
+        private float minValue = 1f / 12f;
 
         private float GetApertureFromSliderValue() {
             // TODO: Update this formula. 
-            return slider.value / 1000;
+            return 1 / (slider.value * (maxValue - minValue) + minValue);
         }
 
         override public Type ParameterType { get { return Type.Aperture; } }
 
-        public ApertureOption(Slider slider, Camera camera) {
+        public ApertureOption(Slider slider, Camera camera, Volume volume) {
             this.slider = slider;
             this.camera = camera;
+            this.volume = volume;
+            volume.profile.TryGet<DepthOfField>(out depthOfField);
         }
 
         public override Vector3 GetPosition() {
@@ -207,14 +225,16 @@ public class MenuController : MonoBehaviour {
             if (slider.value >= 0) {
                 slider.value -= byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetApertureFromSliderValue();
+            depthOfField.aperture.value = GetApertureFromSliderValue();
+            camera.aperture = GetApertureFromSliderValue();
         }
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
                 slider.value += byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetApertureFromSliderValue();
+            depthOfField.aperture.value = GetApertureFromSliderValue();
+            camera.aperture = GetApertureFromSliderValue();
         }
     }
 
@@ -223,9 +243,9 @@ public class MenuController : MonoBehaviour {
         private readonly Camera camera;
         private readonly float adjustmentSpeed = 1f;
 
-        private float GetISOFromSliderValue() {
+        private int GetISOFromSliderValue() {
             // TODO: Update this formula. 
-            return slider.value * 1000;
+            return (int)(slider.value * 1000);
         }
 
         override public Type ParameterType { get { return Type.ISO; } }
@@ -243,14 +263,14 @@ public class MenuController : MonoBehaviour {
             if (slider.value >= 0) {
                 slider.value -= byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetISOFromSliderValue();
+            camera.iso = GetISOFromSliderValue();
         }
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
                 slider.value += byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetISOFromSliderValue();
+            camera.iso = GetISOFromSliderValue();
         }
     }
 }
