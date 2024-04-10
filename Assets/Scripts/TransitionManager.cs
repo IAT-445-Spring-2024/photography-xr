@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TransitionManager: MonoBehaviour {
     [SerializeField] Fade fade;
 
-    public void transition(int sceneIndex) {
+    public void Transition(int sceneIndex) {
         StartCoroutine(SceneTransitionRoutine(sceneIndex));
     }
 

@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/RoomDemoScene.unity
     guid: d08a19c0c8cab44658efd80a8a74f09f
   - enabled: 0
@@ -20,9 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SnowScene.unity
     guid: 11465bf7eb27b4cd9b8e1a89961848a3
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Savanah - Yellow.unity
     guid: 9d44e0c89fec7164b97a1306b2755d5e
+  - enabled: 1
+    path: Assets/Scenes/Forrest - RED Alt.unity
+    guid: 1a0ba84a74356f74cafc20e99a7f3b3c
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3d1bd02694b9b4381b51fb7fa07a2eb3,
       type: 2}

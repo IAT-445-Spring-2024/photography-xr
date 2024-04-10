@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TabletControls: MonoBehaviour {
+    [SerializeField] private TransitionManager transitionManager;
     [SerializeField] private GameObject photoDisplay;
     private PlayerInputActions inputActions;
 
@@ -16,7 +17,8 @@ public class TabletControls: MonoBehaviour {
     }
 
     private void OnMenuPressed(InputAction.CallbackContext context) {
-        photoDisplay.SetActive(!photoDisplay.activeSelf);
+        // photoDisplay.SetActive(!photoDisplay.activeSelf);
+        transitionManager.Transition(1);
     }
 
     private void OnYPressed(InputAction.CallbackContext context) {
