@@ -44,7 +44,7 @@ MonoBehaviour:
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   near: 32
-  far: 644.8
+  far: 790
   distanceFogIntensity: 0.869
   useHeight: 0
   heightGradient:
@@ -134,7 +134,7 @@ Material:
     m_Floats:
     - _DistanceFogIntensity: 0.869
     - _DistanceHeightBlend: 0.5
-    - _Far: 644.8
+    - _Far: 790
     - _HeightFogIntensity: 0.5
     - _HighWorldY: 35
     - _LowWorldY: 5

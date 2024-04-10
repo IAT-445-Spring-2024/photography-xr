@@ -23,6 +23,10 @@ public class PhysicalCamera: MonoBehaviour {
     [SerializeField] private float highestFocalLength = 200f;
     private DepthOfField depthOfField;
 
+    // Audio components
+    [SerializeField] private AudioSource audioSource; // Reference to the AudioSource component
+
+
     // TODO: This is not the best separation of concerns. 
     [SerializeField] private Slider zoomSlider;
 
@@ -161,6 +165,11 @@ public class PhysicalCamera: MonoBehaviour {
         File.WriteAllBytes(filePath, bytes);
         currentFileNumber += 1;
         PrintPhoto(image);
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 
     private void PrintPhoto(Texture2D imageTexture) {
