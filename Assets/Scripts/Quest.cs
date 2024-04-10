@@ -17,4 +17,8 @@ public abstract class Quest: MonoBehaviour {
     private void OnDisable() {
         QuestManager.Instance.DeregisterQuest(this);
     }
+
+    protected void CompleteQuest() {
+        OnComplete?.Invoke(this);
+    }
 }

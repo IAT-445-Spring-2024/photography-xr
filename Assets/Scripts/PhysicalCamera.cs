@@ -33,6 +33,7 @@ public class PhysicalCamera: MonoBehaviour {
     private GameObject photoPrinting;
     [SerializeField] private float printSpeed = 1f;
     [SerializeField] private float printOffset = 0.12f;
+    public event Action DidPressTrigger;
 
     private void Start() {
         RegisterShutterAction();
@@ -161,6 +162,7 @@ public class PhysicalCamera: MonoBehaviour {
         File.WriteAllBytes(filePath, bytes);
         currentFileNumber += 1;
         PrintPhoto(image);
+        DidPressTrigger();
     }
 
     private void PrintPhoto(Texture2D imageTexture) {

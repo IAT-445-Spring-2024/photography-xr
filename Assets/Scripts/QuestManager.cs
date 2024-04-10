@@ -42,7 +42,7 @@ public class QuestManager : MonoBehaviour {
             Display(nextQuest);
         } else {
             titleLabel.text = "You have completed all the quests!";
-            descriptionLabel.text = "Check out the other scenes or your album.";
+            descriptionLabel.text = "Check out the other scenes or your album. Press the menu button on your left controller once to see the album, then press the Y and X key to navigate; press the menu button one more time to select other scenes. ";
         }
     }
 
