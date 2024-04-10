@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fade: MonoBehaviour {
     private Renderer fadeRenderer;
-    [SerializeField] private float duration = 0.5f;
+    public float duration = 0.5f;
 
     private void Start() {
         fadeRenderer = GetComponent<Renderer>();
