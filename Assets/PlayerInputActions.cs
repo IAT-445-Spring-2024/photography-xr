@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm Scene"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8ee9baa-bf82-47a4-b4d5-92472fa2b6c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Next Photo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""812813ea-5518-4263-abdf-b5ef6d7dfeec"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm Scene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +140,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_ShowAlbum = m_Player.FindAction("Show Album", throwIfNotFound: true);
         m_Player_PreviousPhoto = m_Player.FindAction("Previous Photo", throwIfNotFound: true);
         m_Player_NextPhoto = m_Player.FindAction("Next Photo", throwIfNotFound: true);
+        m_Player_ConfirmScene = m_Player.FindAction("Confirm Scene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +206,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ShowAlbum;
     private readonly InputAction m_Player_PreviousPhoto;
     private readonly InputAction m_Player_NextPhoto;
+    private readonly InputAction m_Player_ConfirmScene;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -193,6 +215,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ShowAlbum => m_Wrapper.m_Player_ShowAlbum;
         public InputAction @PreviousPhoto => m_Wrapper.m_Player_PreviousPhoto;
         public InputAction @NextPhoto => m_Wrapper.m_Player_NextPhoto;
+        public InputAction @ConfirmScene => m_Wrapper.m_Player_ConfirmScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +237,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NextPhoto.started += instance.OnNextPhoto;
             @NextPhoto.performed += instance.OnNextPhoto;
             @NextPhoto.canceled += instance.OnNextPhoto;
+            @ConfirmScene.started += instance.OnConfirmScene;
+            @ConfirmScene.performed += instance.OnConfirmScene;
+            @ConfirmScene.canceled += instance.OnConfirmScene;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -230,6 +256,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NextPhoto.started -= instance.OnNextPhoto;
             @NextPhoto.performed -= instance.OnNextPhoto;
             @NextPhoto.canceled -= instance.OnNextPhoto;
+            @ConfirmScene.started -= instance.OnConfirmScene;
+            @ConfirmScene.performed -= instance.OnConfirmScene;
+            @ConfirmScene.canceled -= instance.OnConfirmScene;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -253,5 +282,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnShowAlbum(InputAction.CallbackContext context);
         void OnPreviousPhoto(InputAction.CallbackContext context);
         void OnNextPhoto(InputAction.CallbackContext context);
+        void OnConfirmScene(InputAction.CallbackContext context);
     }
 }

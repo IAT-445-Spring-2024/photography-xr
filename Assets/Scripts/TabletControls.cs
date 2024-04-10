@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TabletControls: MonoBehaviour {
+    [SerializeField] private TransitionManager transitionManager;
     [SerializeField] private GameObject photoDisplay;
+    [SerializeField] private GameObject sceneDisplay;
     private PlayerInputActions inputActions;
 
     private void Awake() {
@@ -13,17 +15,39 @@ public class TabletControls: MonoBehaviour {
         inputActions.Player.ShowAlbum.performed += OnMenuPressed;
         inputActions.Player.PreviousPhoto.performed += OnYPressed;
         inputActions.Player.NextPhoto.performed += OnXPressed;
+        inputActions.Player.ConfirmScene.performed += OnTriggerPressed;
     }
 
     private void OnMenuPressed(InputAction.CallbackContext context) {
-        photoDisplay.SetActive(!photoDisplay.activeSelf);
+        if (!sceneDisplay.activeSelf && !photoDisplay.activeSelf) {
+            photoDisplay.SetActive(true);
+        } else if (photoDisplay.activeSelf) {
+            photoDisplay.SetActive(false);
+            sceneDisplay.SetActive(true);
+        } else {
+            sceneDisplay.SetActive(false);
+        }
+    }
+
+    private void OnTriggerPressed(InputAction.CallbackContext context) {
+        if (sceneDisplay.activeSelf) {
+            transitionManager.Transition(sceneDisplay.GetComponent<SceneDisplay>().selectedSceneSO.index);
+        }
     }
 
     private void OnYPressed(InputAction.CallbackContext context) {
-        photoDisplay.GetComponent<PhotoDisplay>().DisplayPreviousPhoto();
+        if (photoDisplay.activeSelf) {
+            photoDisplay.GetComponent<PhotoDisplay>().DisplayPreviousPhoto();
+        } else if (sceneDisplay.activeSelf) {
+            sceneDisplay.GetComponent<SceneDisplay>().SelectPreviousScene();
+        }
     }
 
     private void OnXPressed(InputAction.CallbackContext context) {
-        photoDisplay.GetComponent<PhotoDisplay>().DisplayNextPhoto();
+        if (photoDisplay.activeSelf) {
+            photoDisplay.GetComponent<PhotoDisplay>().DisplayNextPhoto();
+        } else if (sceneDisplay.activeSelf) {
+            sceneDisplay.GetComponent<SceneDisplay>().SelectNextScene();
+        }
     }
 }
