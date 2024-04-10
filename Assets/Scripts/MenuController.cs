@@ -223,9 +223,9 @@ public class MenuController : MonoBehaviour {
         private readonly Camera camera;
         private readonly float adjustmentSpeed = 1f;
 
-        private float GetISOFromSliderValue() {
+        private int GetISOFromSliderValue() {
             // TODO: Update this formula. 
-            return slider.value * 1000;
+            return (int)(slider.value * 1000);
         }
 
         override public Type ParameterType { get { return Type.ISO; } }
@@ -243,14 +243,14 @@ public class MenuController : MonoBehaviour {
             if (slider.value >= 0) {
                 slider.value -= byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetISOFromSliderValue();
+            camera.iso = GetISOFromSliderValue();
         }
 
         public override void SwitchToRightValue(float byAmount) {
             if (slider.value <= 1) {
                 slider.value += byAmount * adjustmentSpeed;
             }
-            camera.shutterSpeed = GetISOFromSliderValue();
+            camera.iso = GetISOFromSliderValue();
         }
     }
 }
